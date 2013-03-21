@@ -95,7 +95,10 @@ exports.handleMessage = function(hook, args, callback) {
         // Set the authorname to the username that sits in the session.
         // This came in earlier when doing the authentication.
         var client_id = args.client.id;
-        var username = args.client.manager.handshaken[client_id].session.user.username;
+        var username = 'Unknown user ' + Math.round(Math.random()*10000);
+        if (args.client.manager.handshaken[client_id].session && args.client.manager.handshaken[client_id].session.user && args.client.manager.handshaken[client_id].session.user.username) {
+            username = args.client.manager.handshaken[client_id].session.user.username;
+        }
         setAuthor(args.message.token, username, function(err) {
             if (err) {
                 // Drop the message if something goes wrong.

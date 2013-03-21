@@ -6,6 +6,11 @@
                 "authorize" : "ep_oae/index:authorize",
                 "authenticate": "ep_oae/index:authenticate",
                 "handleMessage": "ep_oae/index:handleMessage"
+            },
+            "client_hooks": {
+                "documentReady": "ep_oae/static/js/index:documentReady",
+                "aceEditorCSS": "ep_oae/static/js/index:aceEditorCSS",
+                "aceInitInnerdocbodyHead": "ep_oae/static/js/index:aceInitInnerdocbodyHead"
             }
         }
     ]
