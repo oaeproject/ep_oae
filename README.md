@@ -1,7 +1,7 @@
 ep_oae
 =======
 
-A simple authentication plugin for the [https://github.com/sakaiproject/Hilary](Sakai OAE system).
+A simple authentication plugin for the [Sakai OAE system](https://github.com/sakaiproject/Hilary).
 
 You will need to add the following object to your etherpads' settings.json file:
 
