@@ -1,0 +1,12 @@
+{
+    "parts": [
+        {
+            "name": "Open Academic Environment plugin for etherpad",
+            "hooks": {
+                "authorize" : "ep_oae/index:authorize",
+                "authenticate": "ep_oae/index:authenticate",
+                "handleMessage": "ep_oae/index:handleMessage"
+            }
+        }
+    ]
+}

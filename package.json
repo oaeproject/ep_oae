@@ -1,0 +1,11 @@
+{
+  "name": "ep_oae",
+  "version": "0.0.1",
+  "description": "An etherpad plugin that allows the OAE system to authenticate OAE users.",
+  "author": "Sakai OAE Team",
+  "contributors": [],
+  "dependencies": {},
+  "engines": {
+    "node": ">= 0.8.0"
+  }
+}
