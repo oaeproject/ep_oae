@@ -1,7 +1,12 @@
 ep_oae
 =======
 
-A simple authentication plugin for the [Sakai OAE system](https://github.com/sakaiproject/Hilary).
+This etherpad plugin creates an integration for the [Sakai OAE system](https://github.com/sakaiproject/Hilary).
+It provides a way to do:
+ * simple authentication (via signed urls)
+ * skinning of the editor interface.
+
+## Configuration
 
 You will need to add the following object to your etherpads' settings.json file:
 
