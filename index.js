@@ -19,37 +19,11 @@ var settings = require('ep_etherpad-lite/node/utils/Settings.js');
 
 exports.expressCreateServer = function(hook, args, callback) {
     args.app.use(function(req, res, next) {
-        if (req.query.sessionID && verifySignature(req.query.tenantAlias, req.query.expires, req.query.sessionID, req.query.signature)) {
+        if (req.query.sessionID) {
             req.cookies.sessionID = req.query.sessionID;
             res.cookie('sessionID', req.query.sessionID);
         }
         next();
     });
     callback();
-};
-
-/**
- * Verifies a signature.
- *
- * @param  {String}     tenantAlias     The alias of the tenant for which we're verifying a message.
- * @param  {Number}     expires         When this signature expires.
- * @param  {String}     body            The string on which the signature is generated.
- * @param  {String}     signature       The signature for the body.
- * @return {Boolean}                    Whether or not the passed in signature is correct.
- */
-var verifySignature = function(tenantAlias, expires, body, signature) {
-    expires = parseInt(expires, 10);
-
-    // Check the expiry date.
-    if (Date.now() > expires) {
-        return false;
-    }
-
-    // Check the signature.
-    var msg = tenantAlias + '#' + expires + '#' + body;
-    var signKey = settings.ep_oae.signKey;
-    var hmac = Crypto.createHmac('sha1', signKey);
-    hmac.update(msg);
-    var generatedSig = hmac.digest('hex');
-    return generatedSig === signature;
 };

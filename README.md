@@ -2,20 +2,13 @@
 
 This Etherpad plugin creates an integration for the [Sakai OAE system](https://github.com/sakaiproject/Hilary).
 It provides a way to do:
- * simple authentication (via signed urls)
+ * simple authentication by passing in the sessionID (that was created in Hilaru) in the querystring.
  * skinning of the editor interface.
 
 ## Configuration
 
-You will need to add the following object to your etherpads' settings.json file:
-
-```javascript
-"ep_oae": {
-    "signKey": "The default signing key, please change me."
-}
-```
-
-Obviously this should match with what you've defined in the `config.js` file in Hilary.
+You will need to set the `requireSession` value to `true` in etherpad's `settings.json` file.
+It's recommended to also add in a `sessionKey`. This can be any random value, but should be the same across the cluster.
 
 ## Installation
 
@@ -30,7 +23,3 @@ You should have the following structure (assuming you have etherpad at `/opt/eth
          * ep_oae/
               * index.json
               * ep.json
-
-## Deployment
-
-TODO
