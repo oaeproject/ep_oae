@@ -7,8 +7,30 @@ It provides a way to do:
 
 ## Configuration
 
-You will need to set the `requireSession` value to `true` in etherpad's `settings.json` file.
+You will need to set the `requireSession` and `editOnly` values to `true` in etherpad's `settings.json` file. 
+
 It's recommended to also add in a `sessionKey`. This can be any random value, but should be the same across the cluster.
+
+To get it working, change the `dbType` to `cassandra` and enter the following `dbSettings`:
+
+``` 
+"dbSettings" : {
+    "hosts": ["127.0.0.1:9160"],
+    "keyspace": "oae",
+    "cfName": "Etherpad",
+    "user": "",
+    "pass": "",
+    "timeout": 3000,
+    "replication": 1,
+    "strategyClass": "SimpleStrategy"
+},
+```
+
+The last step is to add the `websocket` protocol. It's important to add this as the first element of the array.
+
+``` 
+"socketTransportProtocols" : ["websocket", "xhr-polling", "jsonp-polling", "htmlfile"],
+``` 
 
 ## Installation
 
