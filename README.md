@@ -2,7 +2,7 @@
 
 This Etherpad plugin creates an integration for the [Sakai OAE system](https://github.com/sakaiproject/Hilary).
 It provides a way to do:
- * simple authentication by passing in the sessionID (that was created in Hilaru) in the querystring.
+ * simple authentication by passing in the sessionID (that was created in Hilary) in the querystring.
  * skinning of the editor interface.
 
 ## Configuration
