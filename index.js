@@ -13,17 +13,20 @@
  * permissions and limitations under the License.
  */
 
-var Crypto = require('crypto');
-
-var settings = require('ep_etherpad-lite/node/utils/Settings.js');
-
 exports.expressCreateServer = function(hook, args, callback) {
-    args.app.use(function(req, res, next) {
+    /*!
+     * Registers a simple endpoint at /oae
+     */
+    args.app.get('/oae/:padId', function(req, res) {
         if (req.query.sessionID) {
             req.cookies.sessionID = req.query.sessionID;
             res.cookie('sessionID', req.query.sessionID);
+            res.redirect('/p/' + req.params.padId);
+        } else {
+            res.send(401, 'Unauthorized');
         }
-        next();
     });
+
+    // This hook is done.
     callback();
 };
