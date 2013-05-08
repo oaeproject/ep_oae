@@ -13,17 +13,24 @@
  * permissions and limitations under the License.
  */
 
-var Crypto = require('crypto');
-
-var settings = require('ep_etherpad-lite/node/utils/Settings.js');
-
 exports.expressCreateServer = function(hook, args, callback) {
-    args.app.use(function(req, res, next) {
+    /*!
+     * Registers a simple endpoint at /oae that sets the sessionID as a cookie and redirects
+     * the user to the pad.
+     * We use an endpoint rather than some middleware as we cannot guarantee the order
+     * in which plugins get loaded and thus cannot be sure that our middleware gets picked
+     * up before Etherpad's session middleware.
+     */
+    args.app.get('/oae/:padId', function(req, res) {
         if (req.query.sessionID) {
             req.cookies.sessionID = req.query.sessionID;
             res.cookie('sessionID', req.query.sessionID);
+            res.redirect('/p/' + req.params.padId);
+        } else {
+            res.send(401, 'Unauthorized');
         }
-        next();
     });
+
+    // This hook is done.
     callback();
 };
