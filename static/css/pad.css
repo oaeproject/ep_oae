@@ -1,0 +1,47 @@
+/* Hide the 'save a revision' button */
+div.toolbar ul.menu_right li[data-key="savedRevision"] {
+    display:none;
+}
+/* Hide the separator directly after the saved revision. */
+div.toolbar ul.menu_right li[data-key="savedRevision"] + li.separator {
+    display:none;
+}
+
+
+/* Hide the embed button */
+div.toolbar ul.menu_right li[data-key="embed"] {
+    display:none;
+}
+/* Hide the separator directly after the embed button. */
+div.toolbar ul.menu_right li[data-key="embed"] + li.separator {
+    display:none;
+}
+
+
+/* Hide the timeslider button */
+div.toolbar ul.menu_right li[onClick="document.location = document.location.pathname+ '/timeslider'"] {
+    display:none;
+}
+
+/* Hide the notification that you need to install abiword (in the import/export dialog) */
+div#importmessageabiword {
+    /* We need to add !important as etherpad uses an element style attribute to show the text */
+    display:none !important;
+}
+
+
+/* Apply new borders and group them together */
+div.toolbar ul.menu_right li {
+    margin:0;
+}
+div.toolbar ul.menu_right li a {
+    border-radius: 0;
+}
+div.toolbar ul.menu_right li[data-key="import_export"] a {
+    border-radius:3px 0 0 3px;
+    border-right:0;
+}
+div.toolbar ul.menu_right li[data-key="showusers"] a {
+    border-radius:0 3px 3px 0;
+    border-left:0;
+}
