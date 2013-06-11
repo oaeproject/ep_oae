@@ -1,6 +1,6 @@
-# ep_oae
+# Open Academic Environment (OAE Project) Etherpad Plugin
 
-This Etherpad plugin creates an integration for the [Sakai OAE system](https://github.com/sakaiproject/Hilary).
+This Etherpad plugin creates an integration for the [Open Academic Environment (OAE)](https://github.com/oaeproject/Hilary).
 It provides a way to do:
  * simple authentication by passing in the sessionID (that was created in Hilary) in the querystring.
  * skinning of the editor interface.
