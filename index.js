@@ -31,7 +31,7 @@ var AuthorManager = require('ep_etherpad-lite/node/db/AuthorManager');
  */
 exports.expressCreateServer = function(hook, args, callback) {
     args.app.get('/oae/:padId', function(req, res) {
-        if (!req.query.sessionID) {
+        if (!req.query.sessionID || !req.query.pathPrefix) {
             res.send(401, 'Unauthorized');
             return;
         }
@@ -47,7 +47,7 @@ exports.expressCreateServer = function(hook, args, callback) {
         }
 
         // Redirect to the pad.
-        res.redirect('/p/' + req.params.padId);
+        res.redirect(req.query.pathPrefix + '/p/' + req.params.padId);
     });
 
     // This hook is done.
