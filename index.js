@@ -101,6 +101,36 @@ exports.expressCreateServer = function(hook, args, callback) {
         });
     });
 
+    /*!
+     * Adds a user id as a recent author to a pad.
+     * This is only really useful under testing circumstances.
+     *
+     * Because Etherpad doesn't add express's bodyParser middleware,
+     * we can't use a .post here. Rather than bringing in something
+     * such as `formidable` and parsing the request ourselves, we expose
+     * this endpoint as a GET api.
+     */
+    args.app.get('/oae/:padId/recentAuthors/add', function(req, res) {
+        if (req.query.apikey !== APIKEY) {
+            return res.send(401, 'Missing or wrong api key');
+        } else if (!req.params.padId || !req.query.userId) {
+            return res.send(400, 'Missing padId or userId');
+        }
+
+        // We need to retrieve the etherpad author ID for the given OAE user id
+        DB.get('mapper2author:' + req.query.userId, function(err, authorId) {
+            if (err) {
+                console.error('Error when retrieving author for userId: ', err);
+                return res.send(500, 'Error when retrieving author author for userId');
+            } else if (!authorId) {
+                return res.send(404, 'No author found for that user ID');
+            }
+
+            RecentAuthors.addRecentAuthor(req.params.padId, authorId);
+            return res.send(200);
+        });
+    });
+
     return callback();
 };
 
