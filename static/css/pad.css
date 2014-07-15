@@ -19,7 +19,7 @@ div.toolbar ul.menu_right li[data-key="embed"] + li.separator {
 
 
 /* Hide the timeslider button */
-div.toolbar ul.menu_right li[onClick="document.location = document.location.pathname+ '/timeslider'"] {
+div.toolbar ul.menu_right li[data-key="showTimeSlider"] {
     display:none;
 }
 
