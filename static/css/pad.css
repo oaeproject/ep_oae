@@ -3,3 +3,41 @@ div#importmessageabiword {
     /* We need to add !important as etherpad uses an element style attribute to show the text */
     display:none !important;
 }
+
+/* Hide the `My view` text */
+#settings h2[data-l10n-id="pad.settings.myView"] {
+    display: none;
+}
+
+/* Hide the `Global view` text as it's empty */
+#settings h2[data-l10n-id="pad.settings.globalView"] {
+    display: none;
+}
+
+/* Because we're hiding the global view, we don't need such a big pop-up */
+#settings {
+    max-width: 300px;
+}
+
+/* Add more spacing */
+#settings .column input[type="checkbox"] {
+    margin-left: 10px;
+}
+#settings .column label {
+    margin-left: 5px;
+}
+
+/* Users shouldn't be able to select whether the page view plugin is in effect */
+#settings #options-pageview, label[for="options-pageview"] {
+    display: none;
+}
+
+/* Hide the font type in the pad settings view */
+#settings label[data-l10n-id="pad.settings.fontType"], #viewfontmenu {
+    display: none;
+}
+
+/* Hide the language picker in the pad settings view */
+#settings label[data-l10n-id="pad.settings.language"], #languagemenu {
+    display: none;
+}
