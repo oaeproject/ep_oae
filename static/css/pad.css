@@ -41,3 +41,27 @@ div#importmessageabiword {
 #settings label[data-l10n-id="pad.settings.language"], #languagemenu {
     display: none;
 }
+
+/* Hide the import-related functionality */
+#importexport h1, #importexport div.acl-write {
+    display: none;
+}
+/* Fix up the spacing of the import/export pop up */
+#importexport {
+    max-width: 300px;
+}
+#importexport #exportColumn {
+    margin-top: 0px;
+}
+#importexport .exporttype {
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+/* Clean up the users window */
+#users {
+    min-width: 250px;
+}
+#users #myusernameedit {
+    width: 90%;
+}
