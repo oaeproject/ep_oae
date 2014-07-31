@@ -42,6 +42,12 @@ div#importmessageabiword {
     display: none;
 }
 
+/* Give the settings title the same visual look as the export title */
+#settings h1 {
+    color: #777;
+    font-size: 15px;
+}
+
 /* Hide the import-related functionality */
 #importexport h1, #importexport div.acl-write {
     display: none;
@@ -52,6 +58,12 @@ div#importmessageabiword {
 }
 #importexport #exportColumn {
     margin-top: 0px;
+}
+#importexport #exportColumn h2 {
+    margin-bottom: 10px;
+}
+#importexport #exportColumn a div {
+    height: 16px;
 }
 #importexport .exporttype {
     margin-top: 5px;
@@ -64,4 +76,14 @@ div#importmessageabiword {
 }
 #users #myusernameedit {
     width: 90%;
+}
+
+
+/* Reduce some of the page paddings */
+#innerdocbody.innerPV {
+    padding-top: 50px !important;
+}
+.pageBreakComputed {
+    margin-bottom: 10px !important;
+    margin-top: 50px !important;
 }
