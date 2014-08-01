@@ -46,7 +46,7 @@ div#importmessageabiword {
 #settings h1 {
     color: #777;
     font-size: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 /* Hide the import-related functionality */
@@ -61,7 +61,7 @@ div#importmessageabiword {
     margin-top: 0px;
 }
 #importexport #exportColumn h2 {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 #importexport #exportColumn a div {
     height: 16px;
