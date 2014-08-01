@@ -46,6 +46,7 @@ div#importmessageabiword {
 #settings h1 {
     color: #777;
     font-size: 15px;
+    margin-bottom: 10px;
 }
 
 /* Hide the import-related functionality */
@@ -60,7 +61,7 @@ div#importmessageabiword {
     margin-top: 0px;
 }
 #importexport #exportColumn h2 {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 #importexport #exportColumn a div {
     height: 16px;
@@ -78,12 +79,24 @@ div#importmessageabiword {
     width: 90%;
 }
 
-
 /* Reduce some of the page paddings */
 #innerdocbody.innerPV {
     padding-top: 50px !important;
 }
+#innerdocbody.innerPV > div {
+    margin-left: 50px !important;
+    margin-right: 50px !important;
+}
 .pageBreakComputed {
     margin-bottom: 10px !important;
     margin-top: 50px !important;
+}
+
+/* Position the online count button a bit better */
+#online_count {
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
+    position: relative;
+    top: 2px;
 }
