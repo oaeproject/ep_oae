@@ -18,6 +18,7 @@ var util = require('util');
 
 var AuthorManager = require('ep_etherpad-lite/node/db/AuthorManager');
 var DB = require('ep_etherpad-lite/node/db/DB').db;
+var PadManager = require('ep_etherpad-lite/node/db/PadManager');
 var PadMessageHandler = require('ep_etherpad-lite/node/handler/PadMessageHandler');
 
 var RecentAuthors = require('./lib/RecentAuthors');
@@ -46,7 +47,11 @@ exports.expressCreateServer = function(hook, args, callback) {
      * If a language has been specified, we'll set it in a cookie as well.
      */
     args.app.get('/oae/:padId', function(req, res) {
-        if (!req.query.sessionID || !req.query.pathPrefix) {
+        if (!req.query.sessionID || 
+            !req.query.pathPrefix ||
+            !req.query.authorId ||
+            !req.query.userId ||
+            !req.query.contentId) {
             res.send(401, 'Unauthorized');
             return;
         }
@@ -61,74 +66,11 @@ exports.expressCreateServer = function(hook, args, callback) {
             res.cookie('language', req.query.language);
         }
 
+        // Keep track of which pad the author joined
+        RecentAuthors.join(req.params.padId, req.query.authorId, req.query.userId, req.query.contentId);
+
         // Redirect to the pad
         res.redirect(req.query.pathPrefix + '/p/' + req.params.padId);
-    });
-
-    /*!
-     * Returns whether or not a user made a change in a certain pad
-     */
-    args.app.get('/oae/:padId/recentAuthors', function(req, res) {
-        if (req.query.apikey !== APIKEY) {
-            return res.send(401, 'Missing or wrong api key');
-        } else if (!req.params.padId || !req.query.userId) {
-            return res.send(400, 'Missing padId or userId');
-        }
-
-        // We need to retrieve the etherpad author ID for the given OAE user id
-        DB.get('mapper2author:' + req.query.userId, function(err, authorId) {
-            if (err) {
-                console.error('Error when retrieving author for userId: ', err);
-                return res.send(500, 'Error when retrieving author author for userId');
-            } else if (!authorId) {
-                return res.send(404, 'No author found for that user ID');
-            }
-
-            /*
-             * We perform a check and clear as the user could do:
-             *   1.  Make a couple of changes
-             *   2.  Navigate away from the page (thus triggering a publication)
-             *   3.  Come back to the document in 5 minutes
-             *   4.  Watch another user make some changes
-             *   5.  Navigate away from the page
-             *
-             * Step 5 should not trigger a second publication as he did not make any changes.
-             * If we would not remove the user from the recent authors list in step 2, we would wrongly
-             * generate that second publication in step 5
-             */
-            var isRecent = RecentAuthors.checkAndClearRecentAuthor(req.params.padId, authorId);
-            return res.send(200, {'recent': isRecent});
-        });
-    });
-
-    /*!
-     * Adds a user id as a recent author to a pad.
-     * This is only really useful under testing circumstances.
-     *
-     * Because Etherpad doesn't add express's bodyParser middleware,
-     * we can't use a .post here. Rather than bringing in something
-     * such as `formidable` and parsing the request ourselves, we expose
-     * this endpoint as a GET api.
-     */
-    args.app.get('/oae/:padId/recentAuthors/add', function(req, res) {
-        if (req.query.apikey !== APIKEY) {
-            return res.send(401, 'Missing or wrong api key');
-        } else if (!req.params.padId || !req.query.userId) {
-            return res.send(400, 'Missing padId or userId');
-        }
-
-        // We need to retrieve the etherpad author ID for the given OAE user id
-        DB.get('mapper2author:' + req.query.userId, function(err, authorId) {
-            if (err) {
-                console.error('Error when retrieving author for userId: ', err);
-                return res.send(500, 'Error when retrieving author author for userId');
-            } else if (!authorId) {
-                return res.send(404, 'No author found for that user ID');
-            }
-
-            RecentAuthors.addRecentAuthor(req.params.padId, authorId);
-            return res.send(200);
-        });
     });
 
     return callback();
@@ -170,9 +112,12 @@ exports.handleMessage = function(hook, args, callback) {
         } else if (args.message.data.type === 'USER_CHANGES') {
             var apool = args.message.data.apool;
             if (apool && apool.nextNum !== 0 && apool.numToAttrib && apool.numToAttrib['0'] && apool.numToAttrib['0'].length === 2 && apool.numToAttrib['0'][0] === 'author') {
+                // Get the ID of the author who made the change
                 var authorId = args.message.data.apool.numToAttrib["0"][1];
+
+                // Get the pad Id
                 var padId = PadMessageHandler.sessioninfos[args.client.id].padId;
-                RecentAuthors.addRecentAuthor(padId, authorId);
+                RecentAuthors.madeEdit(padId, authorId);
             }
             return callback();
         } else {
