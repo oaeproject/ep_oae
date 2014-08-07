@@ -21,7 +21,7 @@
     }
   ],
   "dependencies": {
-    "amqp": "0.2.0"
+    "amqp": "git://github.com/oaeproject/node-amqp#0.1.8.x"
   },
   "engines": {
     "node": ">= 0.8.0"

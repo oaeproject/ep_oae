@@ -16,6 +16,7 @@
 var fs = require('fs');
 var util = require('util');
 
+var AttributePool = require('ep_etherpad-lite/static/js/AttributePool')
 var AuthorManager = require('ep_etherpad-lite/node/db/AuthorManager');
 var DB = require('ep_etherpad-lite/node/db/DB').db;
 var PadManager = require('ep_etherpad-lite/node/db/PadManager');
@@ -45,6 +46,8 @@ exports.expressCreateServer = function(hook, args, callback) {
      * in which plugins get loaded and thus cannot be sure that our middleware gets picked
      * up before Etherpad's session middleware.
      * If a language has been specified, we'll set it in a cookie as well.
+     * The `contentId`, `userId` and `authorId` are all used to add the user to the recent authors
+     * list for a pad.
      */
     args.app.get('/oae/:padId', function(req, res) {
         if (!req.query.sessionID || 
@@ -77,12 +80,13 @@ exports.expressCreateServer = function(hook, args, callback) {
 };
 
 /**
- * The `handleMessage` hook.
- * It takes care of dropping username updates as those are not allowed.
+ * The `handleMessage` hook. It takes care of:
+ *  - dropping username updates as those are not allowed.
+ *  - keeping track of who made changes to what pad
  *
- * @param  {String}   hook     The hook name (in this case `handleMessage`).
- * @param  {Object}   args     The arguments to this hook. In this case it's a `client` socket.io object and a `message` object.
- * @param  {Function} callback Standard etherpad callback function
+ * @param  {String}     hook        The hook name (in this case `handleMessage`).
+ * @param  {Object}     args        The arguments to this hook. In this case it's a `client` socket.io object and a `message` object.
+ * @param  {Function}   callback    Standard etherpad callback function
  */
 exports.handleMessage = function(hook, args, callback) {
     if (args.message && args.message.data) {
@@ -110,15 +114,30 @@ exports.handleMessage = function(hook, args, callback) {
 
         // Somebody made a change to a document
         } else if (args.message.data.type === 'USER_CHANGES') {
-            var apool = args.message.data.apool;
-            if (apool && apool.nextNum !== 0 && apool.numToAttrib && apool.numToAttrib['0'] && apool.numToAttrib['0'].length === 2 && apool.numToAttrib['0'][0] === 'author') {
-                // Get the ID of the author who made the change
-                var authorId = args.message.data.apool.numToAttrib["0"][1];
-
-                // Get the pad Id
-                var padId = PadMessageHandler.sessioninfos[args.client.id].padId;
-                RecentAuthors.madeEdit(padId, authorId);
+            // Unlikely that a user change would not have an attribute pool,
+            // but just to be on the safe side, we return immediately if it doesn't
+            if (!args.message.data.apool) {
+                return callback();
             }
+
+            // Create a proper attribute pool object. The attribute pool
+            // in this change event holds all the attributes that were changed
+            // See https://github.com/ether/etherpad-lite/wiki/Changeset-Library#apool for more information
+            var apool = new AttributePool().fromJsonable(args.message.data.apool);
+
+            // Find out who the author of this change is
+            var authorId = null;
+            apool.eachAttrib(function(name, value) {
+                if (name === 'author') {
+                    authorId = value;
+                }
+            });
+
+            // Determine what pad this change was made in
+            var padId = PadMessageHandler.sessioninfos[args.client.id].padId;
+
+            // Remember that the author made a change to the pad
+            RecentAuthors.madeEdit(padId, authorId);
             return callback();
         } else {
             return callback();
