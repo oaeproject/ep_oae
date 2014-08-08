@@ -35,22 +35,22 @@ try {
  * The `handleMessage` hook
  *
  * @param  {String}     hook        The hook name (in this case `expressCreateServer`)
- * @param  {Object}     args        The arguments to this hook. In this case it's the express `app` object
+ * @param  {Object}     args        The arguments to this hook. In this case the express `app` object
  * @param  {Function}   callback    Standard etherpad callback function
  */
 exports.expressCreateServer = function(hook, args, callback) {
     /*!
-     * Registers a simple endpoint that sets the sessionID as a cookie and redirects
-     * the user to the pad.
+     * Register a simple endpoint that sets the sessionID as a cookie and redirects
+     * the user to the pad. If a language has been specified, that'll be set it in the
+     * cookie as well. The `contentId`, `userId` and `authorId` parameters are all used
+     * to add the user to the recent authors list for a pad.
+     *
      * We use an endpoint rather than some middleware as we cannot guarantee the order
      * in which plugins get loaded and thus cannot be sure that our middleware gets picked
      * up before Etherpad's session middleware.
-     * If a language has been specified, we'll set it in a cookie as well.
-     * The `contentId`, `userId` and `authorId` are all used to add the user to the recent authors
-     * list for a pad.
      */
     args.app.get('/oae/:padId', function(req, res) {
-        if (!req.query.sessionID || 
+        if (!req.query.sessionID ||
             !req.query.pathPrefix ||
             !req.query.authorId ||
             !req.query.userId ||
@@ -80,12 +80,12 @@ exports.expressCreateServer = function(hook, args, callback) {
 };
 
 /**
- * The `handleMessage` hook. It takes care of:
- *  - dropping username updates as those are not allowed.
- *  - keeping track of who made changes to what pad
+ * The `handleMessage` hook takes care of:
+ *  - dropping username updates as those are not allowed
+ *  - keeping track of who made changes to a pad
  *
- * @param  {String}     hook        The hook name (in this case `handleMessage`).
- * @param  {Object}     args        The arguments to this hook. In this case it's a `client` socket.io object and a `message` object.
+ * @param  {String}     hook        The hook name (in this case `handleMessage`)
+ * @param  {Object}     args        The arguments to this hook. In this case a `client` socket.io object and a `message` object
  * @param  {Function}   callback    Standard etherpad callback function
  */
 exports.handleMessage = function(hook, args, callback) {
@@ -93,7 +93,7 @@ exports.handleMessage = function(hook, args, callback) {
         // Username updates appear in USERINFO_UPDATE messages
         if (args.message.data.type === 'USERINFO_UPDATE') {
             // Unfortunately color and IP updates also appear in USERINFO_UPDATE messages
-            // and there is no way to distinct between the two. We need to fetch the original
+            // and there is no way to distinguish between the two. We need to fetch the original
             // author name and compare it with the name in the message object.
             // If it's the same we let the update flow through, otherwise we deny it.
             AuthorManager.getAuthor(args.message.data.userInfo.userId, function(err, user) {
@@ -114,15 +114,12 @@ exports.handleMessage = function(hook, args, callback) {
 
         // Somebody made a change to a document
         } else if (args.message.data.type === 'USER_CHANGES') {
-            // Unlikely that a user change would not have an attribute pool,
-            // but just to be on the safe side, we return immediately if it doesn't
+            // Create a proper attribute pool object. The attribute pool
+            // in the change event holds all the attributes that were changed
+            // @see https://github.com/ether/etherpad-lite/wiki/Changeset-Library#apool
             if (!args.message.data.apool) {
                 return callback();
             }
-
-            // Create a proper attribute pool object. The attribute pool
-            // in this change event holds all the attributes that were changed
-            // See https://github.com/ether/etherpad-lite/wiki/Changeset-Library#apool for more information
             var apool = new AttributePool().fromJsonable(args.message.data.apool);
 
             // Find out who the author of this change is
