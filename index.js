@@ -143,3 +143,18 @@ exports.handleMessage = function(hook, args, callback) {
         return callback();
     }
 };
+
+/**
+ * This hook gets called when a user leaves a pad
+ *
+ * @param  {String}     hook                    The name of the hook
+ * @param  {Object}     args                    The hook's arguments
+ * @param  {Object}     args.session            The session information that is passed along when the hook is called
+ * @param  {String}     args.session.padId      The etherpad pad id that the user left
+ * @param  {String}     args.session.author     The etherpad author id of the user who left
+ * @param  {Function}   callback                Standard callback function
+ */
+exports.userLeave = function(hook, session, callback) {
+    RecentAuthors.leave(session.padId, session.author);
+    return callback();
+};
