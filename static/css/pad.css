@@ -2,6 +2,8 @@
 @import url('//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700&subset=latin,cyrillic-ext,latin-ext,greek-ext');
 /* Import the Font Awesome Icon Set */
 @import url('//maxcdn.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css');
+/* Import Bootstrap 3.2.0 */
+@import url('//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css');
 
 /* Override global values */
 body,
@@ -12,87 +14,8 @@ textarea {
 #innerdocbody {
     font-size: 14px;
     line-height: 18px;
-}
-
-/* Hide the notification that you need to install abiword (in the import/export dialog) */
-div#importmessageabiword {
-    /* We need to add !important as etherpad uses an element style attribute to show the text */
-    display:none !important;
-}
-
-/* Hide the `My view` text */
-#settings h2[data-l10n-id="pad.settings.myView"] {
-    display: none;
-}
-
-/* Hide the `Global view` text as it's empty */
-#settings h2[data-l10n-id="pad.settings.globalView"] {
-    display: none;
-}
-
-/* Because we're hiding the global view, we don't need such a big pop-up */
-#settings {
-    max-width: 300px;
-}
-
-/* Add more spacing */
-#settings .column input[type="checkbox"] {
-    margin-left: 10px;
-}
-#settings .column label {
-    margin-left: 5px;
-}
-
-/* Users shouldn't be able to select whether the page view plugin is in effect */
-#settings #options-pageview, label[for="options-pageview"] {
-    display: none;
-}
-
-/* Hide the font type in the pad settings view */
-#settings label[data-l10n-id="pad.settings.fontType"], #viewfontmenu {
-    display: none;
-}
-
-/* Hide the language picker in the pad settings view */
-#settings label[data-l10n-id="pad.settings.language"], #languagemenu {
-    display: none;
-}
-
-/* Give the settings title the same visual look as the export title */
-#settings h1 {
-    color: #777;
-    font-size: 15px;
-    margin-bottom: 5px;
-}
-
-/* Hide the import-related functionality */
-#importexport h1, #importexport div.acl-write {
-    display: none;
-}
-/* Fix up the spacing of the import/export pop up */
-#importexport {
-    max-width: 300px;
-}
-#importexport #exportColumn {
-    margin-top: 0px;
-}
-#importexport #exportColumn h2 {
-    margin-bottom: 10px;
-}
-#importexport #exportColumn a div {
-    height: 16px;
-}
-#importexport .exporttype {
-    margin-top: 5px;
-    margin-left: 5px;
-}
-
-/* Clean up the users window */
-#users {
-    min-width: 250px;
-}
-#users #myusernameedit {
-    width: 90%;
+    min-height: 400px !important;
+    background-color: transparent;
 }
 
 /* Reduce some of the page paddings */
@@ -108,12 +31,23 @@ div#importmessageabiword {
     margin-top: 50px !important;
 }
 
+/* Clean up the users window */
+#users {
+    min-width: 250px;
+}
+#users #myusernameedit {
+    width: 90%;
+}
+
 /* Position the online count button a bit better */
 #online_count {
+    -webkit-border-radius: 4px !important;
+       -moz-border-radius: 4px !important;
+            border-radius: 4px !important;
+    color: #FFF;
     display: inline-block;
-    margin-left: 5px;
-    margin-right: 5px;
-    position: relative;
+    position: absolute;
+    padding: 3px 4px;
     top: 2px;
 }
 
@@ -139,9 +73,14 @@ div#importmessageabiword {
 }
 
 .toolbar ul li a {
-    border-radius: 3px !important;
+    -webkit-border-radius: 3px !important;
+       -moz-border-radius: 3px !important;
+            border-radius: 3px !important;
     background: transparent;
     border: none;
+   -webkit-box-shadow: none !important;
+       -moz-box-shadow: none !important;
+            box-shadow: none !important;
 }
 
 .toolbar ul li a:hover {
@@ -180,6 +119,8 @@ div#importmessageabiword {
 .buttonicon-insertunorderedlist,
 .buttonicon-indent,
 .buttonicon-outdent,
+.buttonicon-adjust,
+.buttonicon-download,
 .buttonicon-showusers {
     background-image: none;
 }
@@ -195,6 +136,8 @@ div#importmessageabiword {
 }
 
 #editorcontainerbox #editorcontainer {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
     top: 0;
 }
 
@@ -204,10 +147,6 @@ div#importmessageabiword {
         -ms-box-sizing: border-box;
             box-sizing: border-box;
     padding: 12px;
-}
-
-#innerdocbody {
-    min-height: 400px !important;
 }
 
 #innerdocbody > div {
@@ -230,13 +169,12 @@ div#importmessageabiword {
 
 #users #myusernameedit {
     font-size: 18px;
-    height: 24px;
+    height: 31px;
     margin-left: 2px;
     width: 95%;
 }
 
 #users #myuser {
-    margin-bottom: 12px;
     height: 32px;
 }
 
@@ -253,6 +191,14 @@ div#importmessageabiword {
     height: 30px;
 }
 
+#users #nootherusers {
+    display: none !important;
+}
+
+#users #otheruserstable {
+    margin-top: 12px;
+}
+
 #users #otheruserstable td {
     font-size: 14px;
     padding: 0 2px 7px 0;
@@ -266,4 +212,31 @@ div#importmessageabiword {
     height: 25px;
     margin: 0 4px 0 0;
     width: 25px;
+}
+
+/* Override the ep_font_size style */
+#font-size .size-selection {
+    height: 23px;
+    margin-top: 5px;
+    padding: 0 4px;
+}
+
+/* Override the user list colour picker */
+#myuser #mycolorpicker {
+    height: 275px;
+    padding: 12px;
+    top: 14px;
+    width: 245px;
+}
+
+
+
+@media (max-width: 420px) {
+    .toolbar {
+        display: none;
+    }
+
+    #editorcontainerbox {
+        top: 0 !important;
+    }
 }
