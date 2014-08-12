@@ -13,7 +13,7 @@ It's recommended to also add in a `sessionKey`. This can be any random value, bu
 
 To get it working, change the `dbType` to `cassandra` and enter the following `dbSettings`:
 
-```
+```javascript
 "dbSettings" : {
     "hosts": ["127.0.0.1:9160"],
     "keyspace": "oae",
@@ -23,13 +23,13 @@ To get it working, change the `dbType` to `cassandra` and enter the following `d
     "timeout": 3000,
     "replication": 1,
     "strategyClass": "SimpleStrategy"
-},
+}
 ```
 
 The last step is to add the `websocket` protocol. It's important to add this as the first element of the array.
 
-```
-"socketTransportProtocols" : ["websocket", "xhr-polling", "jsonp-polling", "htmlfile"],
+```javascript
+"socketTransportProtocols" : ["websocket", "xhr-polling", "jsonp-polling", "htmlfile"]
 ```
 
 ## Installation
@@ -46,4 +46,17 @@ You should have the following structure (assuming you have etherpad at `/opt/eth
               * index.json
               * ep.json
 
-Copy or symlink the `static/css/padd.css` file in this plugin to `your-etherpad-directory/src/static/custom/pad.css`. This file will skin the etherpad chrome.
+Copy or symlink the `static/css/padd.css` file in this plugin to `your-etherpad-directory/src/static/custom/pad.css`. This file will skin the etherpad chrome. In order to have custom titles for headers, copy or symlink the `static/templates/editbarButtons.ejs` file in this plugin to `your-etherpad-directory/node_modules/ep_headings/templates/editbarButtons.ejs`.
+
+In order to use the OAE toolbar, the etherpad `settings.json` file needs to be updated to reflect the following changes:
+
+```javascript
+"toolbar": {
+    "left": [
+        ["bold", "italic", "underline", "strikethrough", "orderedlist", "unorderedlist", "indent", "outdent"]
+    ],
+    "right": [
+        ["showusers"]
+    ]
+}
+```

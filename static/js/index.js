@@ -29,9 +29,6 @@ exports.postAceInit = function (hook_name, args, cb) {
     // Add the custom authorship colour toggle button
     $('ul.menu_left').append('<li data-type="button" data-key="colorcheck"><label for="options-colorscheck" data-l10n-id="pad.settings.colorcheck"><a class="grouped-right"><span class="buttonicon buttonicon-adjust" data-l10n-id="pad.settings.colorcheck" title="Authorship colors"><i class="icon-adjust"></i></span></a></label></li>');
     $('ul.menu_left').append('<li data-type="button" data-key="download"><a target="_blank" href="/etherpad/0/p/' + args.pad.getPadId() + '/export/pdf"><div class="buttonicon buttonicon-download" data-l10n-id="pad.importExport.exportpdf" title="Download"><i class="icon-print"></i></div></a></li>');
-    // Hide the font-size button and show the font-size dropdown by default
-    $('.font-size-icon').hide();
-    $('#font-size').show();
     // Tweak the online count style
     $('#online_count').addClass('badge badge-important');
     // Show the toolbar
@@ -42,6 +39,10 @@ exports.postAceInit = function (hook_name, args, cb) {
     $('#editorcontainerbox').animate({
         'top': '49px',
     }, 500);
+    // Hide line numbers by default
+    pad.changeViewOption('showLineNumbers', false);
+    // Hide authorship colours by default
+    pad.changeViewOption('showAuthorColors', false);
 };
 
 /**
