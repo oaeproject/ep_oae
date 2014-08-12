@@ -3,6 +3,7 @@
         {
             "name": "Open Academic Environment plugin for etherpad",
             "hooks": {
+                "exportFileName": "ep_oae/static/js/index.js:exportFileName",
                 "expressCreateServer": "ep_oae/index.js:expressCreateServer",
                 "handleMessage": "ep_oae/index.js:handleMessage",
                 "userLeave": "ep_oae/index.js:userLeave"
@@ -10,8 +11,7 @@
             "client_hooks": {
                 "postAceInit": "ep_oae/static/js/index.js:postAceInit",
                 "userJoinOrUpdate": "ep_oae/static/js/index.js:userJoinOrUpdate",
-                "userLeave": "ep_oae/static/js/index.js:userLeave",
-                "exportFileName": "ep_oae/static/js/index.js:exportFileName"
+                "userLeave": "ep_oae/static/js/index.js:userLeave"
             }
         }
     ]

@@ -85,5 +85,5 @@ exports.userLeave = function(hook_name, args, cb) {
  * @param  {Function}    cb           Standard etherpad callback function
  */
 exports.exportFileName = function(hook_name, padId, cb) {
-    callback(null, Date.now());
+    cb(Date.now().toString());
 };
