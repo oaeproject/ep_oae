@@ -10,7 +10,8 @@
             "client_hooks": {
                 "postAceInit": "ep_oae/static/js/index.js:postAceInit",
                 "userJoinOrUpdate": "ep_oae/static/js/index.js:userJoinOrUpdate",
-                "userLeave": "ep_oae/static/js/index.js:userLeave"
+                "userLeave": "ep_oae/static/js/index.js:userLeave",
+                "exportFileName": "ep_oae/static/js/index.js:exportFileName"
             }
         }
     ]

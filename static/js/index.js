@@ -27,17 +27,17 @@ exports.postAceInit = function (hook_name, args, cb) {
     // Replace the showusers icon with a font awesome icon
     $('.buttonicon-showusers').html('<i class="icon-user"></i>');
     // Add the custom authorship colour toggle button
-    $('ul.menu_left').append('<li data-type="button" data-key="colorcheck"><label for="options-colorscheck" data-l10n-id="pad.settings.colorcheck"><a class="grouped-right"><span class="buttonicon buttonicon-adjust" data-l10n-id="pad.settings.colorcheck" title="Authorship colors"><i class="icon-adjust"></i></span></a></label></li>');
+    $('ul.menu_left').append('<li data-type="button" data-key="colorcheck"><label for="options-colorscheck" data-l10n-id="pad.settings.colorcheck"><a class="grouped-right"><span class="buttonicon buttonicon-adjust" data-l10n-id="pad.settings.colorcheck" title="Toggle authorship colors"><i class="icon-adjust"></i></span></a></label></li>');
     $('ul.menu_left').append('<li data-type="button" data-key="download"><a target="_blank" href="/etherpad/0/p/' + args.pad.getPadId() + '/export/pdf"><div class="buttonicon buttonicon-download" data-l10n-id="pad.importExport.exportpdf" title="Download"><i class="icon-print"></i></div></a></li>');
     // Tweak the online count style
     $('#online_count').addClass('badge badge-important');
     // Show the toolbar
     $('.toolbar').animate({
-        'height': '32px',
+        'height': '52px',
         'opacity': '1'
     }, 500);
     $('#editorcontainerbox').animate({
-        'top': '49px',
+        'top': '55px',
     }, 500);
     // Hide line numbers by default
     pad.changeViewOption('showLineNumbers', false);
@@ -75,4 +75,15 @@ exports.userLeave = function(hook_name, args, cb) {
     setTimeout(function() {
         $('#online_count').addClass('badge badge-important');
     }, 1);
+};
+
+/**
+ * A hook that gets called before a PDF is exported to retrieve a custom file name.
+ *
+ * @param  {String}      hook_name    The name of the hook (exportFileName in this case).
+ * @param  {Object}      args         A set of arguments
+ * @param  {Function}    cb           Standard etherpad callback function
+ */
+exports.exportFileName = function(hook_name, padId, cb) {
+    callback(null, Date.now());
 };
