@@ -31,6 +31,8 @@ try {
     console.error('Could not read the APIKEY: ', err);
 }
 
+var displayName = null;
+
 /**
  * The `handleMessage` hook
  *
@@ -72,6 +74,8 @@ exports.expressCreateServer = function(hook, args, callback) {
         // Keep track of which pad the author joined
         RecentAuthors.join(req.params.padId, req.query.authorId, req.query.userId, req.query.contentId);
 
+        // Store the displayName
+        displayName = req.query.displayName;
         // Redirect to the pad
         res.redirect(req.query.pathPrefix + '/p/' + req.params.padId);
     });
@@ -157,4 +161,15 @@ exports.handleMessage = function(hook, args, callback) {
 exports.userLeave = function(hook, session, callback) {
     RecentAuthors.leave(session.padId, session.author);
     return callback();
+};
+
+/**
+ * A hook that gets called before a PDF is exported to retrieve a custom file name.
+ *
+ * @param  {String}      hook_name    The name of the hook (exportFileName in this case).
+ * @param  {Object}      args         A set of arguments
+ * @param  {Function}    cb           Standard etherpad callback function
+ */
+exports.exportFileName = function(hook_name, padId, cb) {
+    cb(displayName);
 };

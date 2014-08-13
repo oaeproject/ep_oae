@@ -76,14 +76,3 @@ exports.userLeave = function(hook_name, args, cb) {
         $('#online_count').addClass('badge badge-important');
     }, 1);
 };
-
-/**
- * A hook that gets called before a PDF is exported to retrieve a custom file name.
- *
- * @param  {String}      hook_name    The name of the hook (exportFileName in this case).
- * @param  {Object}      args         A set of arguments
- * @param  {Function}    cb           Standard etherpad callback function
- */
-exports.exportFileName = function(hook_name, padId, cb) {
-    cb(Date.now().toString());
-};
