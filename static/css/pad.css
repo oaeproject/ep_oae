@@ -12,10 +12,10 @@ textarea {
 }
 
 #innerdocbody {
+    background-color: transparent;
     font-size: 14px;
     line-height: 18px;
     min-height: 400px !important;
-    background-color: transparent;
 }
 
 /* Reduce some of the page paddings */
