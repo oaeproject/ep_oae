@@ -16,7 +16,8 @@
 var fs = require('fs');
 var util = require('util');
 
-var AttributePool = require('ep_etherpad-lite/static/js/AttributePool')
+var _ = require('ep_etherpad-lite/node_modules/underscore');
+var AttributePool = require('ep_etherpad-lite/static/js/AttributePool');
 var AuthorManager = require('ep_etherpad-lite/node/db/AuthorManager');
 var DB = require('ep_etherpad-lite/node/db/DB').db;
 var PadManager = require('ep_etherpad-lite/node/db/PadManager');
@@ -168,6 +169,11 @@ exports.userLeave = function(hook, session, callback) {
  * @param  {Function}    cb           Standard etherpad callback function
  */
 exports.exportFileName = function(hook_name, padId, cb) {
-    cb('replace me');
-    // cb(RecentAuthors.getPadDisplayName(session.padId, session.author));
+    // Get a user of the pad to retrieve the displayName.
+    var session = _.filter(PadMessageHandler.sessioninfos, function(index, session) {
+        if (session.padId === padId) {
+            return session;
+        }
+    })[0];
+    cb(RecentAuthors.getPadDisplayName(session.padId, session.author));
 };
