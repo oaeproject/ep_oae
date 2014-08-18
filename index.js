@@ -170,7 +170,7 @@ exports.userLeave = function(hook, session, callback) {
  */
 exports.exportFileName = function(hook_name, padId, cb) {
     // Get a user of the pad to retrieve the displayName.
-    var session = _.filter(PadMessageHandler.sessioninfos, function(index, session) {
+    var session = _.filter(PadMessageHandler.sessioninfos, function(session) {
         if (session.padId === padId) {
             return session;
         }
