@@ -156,7 +156,6 @@ exports.handleMessage = function(hook, args, callback) {
  * @param  {Function}   callback                Standard callback function
  */
 exports.userLeave = function(hook, session, callback) {
-    RecentAuthors.getPadDisplayName(session.padId, session.author);
     RecentAuthors.leave(session.padId, session.author);
     return callback();
 };
@@ -169,11 +168,16 @@ exports.userLeave = function(hook, session, callback) {
  * @param  {Function}    cb           Standard etherpad callback function
  */
 exports.exportFileName = function(hook_name, padId, cb) {
-    // Get a user of the pad to retrieve the displayName.
+    // Get a user of the pad to retrieve the displayName
     var session = _.filter(PadMessageHandler.sessioninfos, function(session) {
         if (session.padId === padId) {
             return session;
         }
     })[0];
+
+    if (!session) {
+        return cb('Document');
+    }
+
     cb(RecentAuthors.getPadDisplayName(session.padId, session.author));
 };

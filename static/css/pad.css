@@ -1,4 +1,4 @@
-/* Import the Open Sans font. */
+/* Import the Open Sans font */
 @import url('//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700&subset=latin,cyrillic-ext,latin-ext,greek-ext');
 /* Import the Font Awesome Icon Set */
 @import url('//maxcdn.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css');
@@ -29,6 +29,15 @@ textarea {
 .pageBreakComputed {
     margin-bottom: 10px !important;
     margin-top: 50px !important;
+}
+
+#innerdocbody .ace-line:first-child h1,
+#innerdocbody .ace-line:first-child h2,
+#innerdocbody .ace-line:first-child h3,
+#innerdocbody .ace-line:first-child h4,
+#innerdocbody .ace-line:first-child h5,
+#innerdocbody .ace-line:first-child h6 {
+    margin-top: 0 !important;
 }
 
 /* Clean up the users window */
