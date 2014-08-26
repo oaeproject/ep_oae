@@ -76,3 +76,12 @@ exports.userLeave = function(hook_name, args, cb) {
         $('#online_count').addClass('badge badge-important');
     }, 1);
 };
+
+/**
+ * A hook that allows us to inject CSS stylesheets into the editor frame
+ *
+ * @return {String[]}   A set of paths that point to CSS files that need to be injected in the editor frame
+ */
+exports.aceEditorCSS = function() {
+    return ['ep_oae/static/css/editor.css']
+};
