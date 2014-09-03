@@ -43,6 +43,8 @@ exports.postAceInit = function (hook_name, args, cb) {
     pad.changeViewOption('showLineNumbers', false);
     // Hide authorship colours by default
     pad.changeViewOption('showAuthorColors', false);
+    // Enable the spellchecker
+    $('iframe[name="ace_outer"]').contents().find('iframe').contents().find('#innerdocbody').attr('spellcheck', 'true');
 };
 
 /**
