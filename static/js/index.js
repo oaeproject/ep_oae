@@ -28,7 +28,7 @@ exports.postAceInit = function (hook_name, args, cb) {
     $('.buttonicon-showusers').html('<i class="icon-user"></i>');
     // Add the custom authorship colour toggle button
     $('ul.menu_left').append('<li data-type="button" data-key="colorcheck"><label for="options-colorscheck" data-l10n-id="pad.settings.colorcheck"><a class="grouped-right"><span class="buttonicon buttonicon-adjust" data-l10n-id="pad.settings.colorcheck" title="Toggle authorship colors"><i class="icon-adjust"></i></span></a></label></li>');
-    $('ul.menu_left').append('<li data-type="button" data-key="download"><a target="_blank" href="export/pdf"><div class="buttonicon buttonicon-download" data-l10n-id="pad.importExport.exportpdf" title="Download"><i class="icon-print"></i></div></a></li>');
+    $('ul.menu_left').append('<li data-type="button" data-key="download"><a target="_blank" href="/etherpad/0/p/' + args.pad.getPadId() + '/export/pdf"><div class="buttonicon buttonicon-download" data-l10n-id="pad.importExport.exportpdf" title="Download"><i class="icon-print"></i></div></a></li>');
     // Tweak the online count style
     $('#online_count').addClass('badge badge-important');
     // Show the toolbar
