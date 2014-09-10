@@ -45,6 +45,8 @@ exports.postAceInit = function (hook_name, args, cb) {
     pad.changeViewOption('showAuthorColors', false);
     // Enable the spellchecker
     $('iframe[name="ace_outer"]').contents().find('iframe').contents().find('#innerdocbody').attr('spellcheck', 'true');
+    // Let the parent window know the final URL
+    parent.postMessage('oae.etherpad.loaded: ' + window.location.href, '*');
 };
 
 /**
