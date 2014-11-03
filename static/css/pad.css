@@ -16,6 +16,7 @@ textarea {
     font-size: 14px;
     line-height: 20px;
     min-height: 400px !important;
+    padding: 12px;
 }
 
 /* Reduce some of the page paddings */
@@ -158,14 +159,6 @@ textarea {
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     top: 0;
-}
-
-#outerdocbody iframe {
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-        -ms-box-sizing: border-box;
-            box-sizing: border-box;
-    padding: 12px;
 }
 
 #innerdocbody > div {
