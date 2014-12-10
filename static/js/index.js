@@ -6,31 +6,22 @@
  * @param  {Function}    cb           Standard etherpad callback function
  */
 exports.postAceInit = function (hook_name, args, cb) {
-    // Disable the input field where the user can change his or her name.
-    $('#myusernameedit').prop('disabled', true);
-    // Replace the bold icon with a font awesome icon
-    $('.buttonicon-bold').html('<i class="icon-bold"></i>');
-    // Replace the italic icon with a font awesome icon
-    $('.buttonicon-italic').html('<i class="icon-italic"></i>');
-    // Replace the underline icon with a font awesome icon
-    $('.buttonicon-underline').html('<i class="icon-underline"></i>');
-    // Replace the strikethrough icon with a font awesome icon
-    $('.buttonicon-strikethrough').html('<i class="icon-strikethrough"></i>');
-    // Replace the insertorderedlist icon with a font awesome icon
-    $('.buttonicon-insertorderedlist').html('<i class="icon-list-ol"></i>');
-    // Replace the insertunorderedlist icon with a font awesome icon
-    $('.buttonicon-insertunorderedlist').html('<i class="icon-list-ul"></i>');
-    // Replace the indent icon with a font awesome icon
-    $('.buttonicon-indent').html('<i class="icon-indent-right"></i>');
-    // Replace the outdent icon with a font awesome icon
-    $('.buttonicon-outdent').html('<i class="icon-indent-left"></i>');
-    // Replace the showusers icon with a font awesome icon
-    $('.buttonicon-showusers').html('<i class="icon-user"></i>');
-    // Add the custom authorship colour toggle button
-    $('ul.menu_left').append('<li data-type="button" data-key="colorcheck"><label for="options-colorscheck" data-l10n-id="pad.settings.colorcheck"><a class="grouped-right"><span class="buttonicon buttonicon-adjust" data-l10n-id="pad.settings.colorcheck" title="Toggle authorship colors"><i class="icon-adjust"></i></span></a></label></li>');
-    $('ul.menu_left').append('<li data-type="button" data-key="download"><a target="_blank" href="' + window.location.pathname + '/export/pdf"><div class="buttonicon buttonicon-download" data-l10n-id="pad.importExport.exportpdf" title="Download"><i class="icon-print"></i></div></a></li>');
+    // Track whether or not authorship colors are visible
+    var authorColors = false;
+
     // Tweak the online count style
     $('#online_count').addClass('badge badge-important');
+
+    // Disable the input field where the user can change his or her name.
+    $('#myusernameedit').prop('disabled', true);
+
+    // Replace the icon in the show users button
+    $('.buttonicon-showusers').removeClass('buttonicon-showusers').addClass('buttonicon-oae buttonicon-user');
+
+    // Add extra buttons to the toolbar *after* the style select
+    $('ul.menu_left').append('<li data-type="button" data-key="colorcheck"><a class="grouped-left" data-l10n-id="pad.settings.colorcheck" title="Toggle authorship colors"><span class="buttonicon buttonicon-oae buttonicon-clearauthorship"></span></a></li>');
+    $('ul.menu_left').append('<li data-type="button" data-key="download"><a target="_blank" href="' + window.location.pathname + '/export/pdf" class="grouped-right" data-l10n-id="pad.importExport.exportpdf" title="Download"><span class="buttonicon buttonicon-oae buttonicon-download"></span></a></li>');
+
     // Show the toolbar
     $('.toolbar').animate({
         'height': '52px',
@@ -39,12 +30,25 @@ exports.postAceInit = function (hook_name, args, cb) {
     $('#editorcontainerbox').animate({
         'top': '55px',
     }, 500);
-    // Hide line numbers by default
-    pad.changeViewOption('showLineNumbers', false);
-    // Hide authorship colours by default
-    pad.changeViewOption('showAuthorColors', false);
+    $('#editorcontainer').animate({
+        'top': '0px',
+    }, 500);
+
     // Enable the spellchecker
     $('iframe[name="ace_outer"]').contents().find('iframe').contents().find('#innerdocbody').attr('spellcheck', 'true');
+
+    // Hide line numbers by default
+    pad.changeViewOption('showLineNumbers', false);
+
+    // Set default authorship colors
+    pad.changeViewOption('showAuthorColors', authorColors);
+    
+    // And toggle when button is clicked
+    $('a[data-l10n-id="pad.settings.colorcheck"]').on('click', function() {
+        authorColors = !authorColors;
+        pad.changeViewOption('showAuthorColors', authorColors);
+        return false;
+    });
 };
 
 /**
