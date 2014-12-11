@@ -9,9 +9,6 @@ exports.postAceInit = function (hook_name, args, cb) {
     // Track whether or not authorship colors are visible
     var authorColors = false;
 
-    // Tweak the online count style
-    $('#online_count').addClass('badge badge-important');
-
     // Disable the input field where the user can change his or her name.
     $('#myusernameedit').prop('disabled', true);
 
@@ -46,7 +43,29 @@ exports.postAceInit = function (hook_name, args, cb) {
         pad.changeViewOption('showAuthorColors', authorColors);
         return false;
     });
+
+    // Tweak the online count style. We need to wait for the call stack to clear as the
+    // event is sent out before the count html is updated. We could use _.defer here but
+    // to avoid importing another dependency setTimeout is used.
+    setTimeout(function() {
+        updateUserCount();
+    }, 1);
 };
+
+/**
+ * A function to keep the user count badge updated correctly
+ */
+
+updateUserCount = function() {
+    // Restore classes that etherpad may remove
+    $('#online_count').addClass('badge badge-important');
+    // No need to show a badge if only one user is accessing the document
+    if ($('#online_count').text() === "1") {
+        $('#online_count').hide();
+    } else {
+        $('#online_count').show();
+    }
+}
 
 /**
  * A hook that gets called when a user joins or updates the pad.
@@ -60,7 +79,7 @@ exports.userJoinOrUpdate = function(hook_name, args, cb) {
     // event is sent out before the count html is updated. We could use _.defer here but
     // to avoid importing another dependency setTimeout is used.
     setTimeout(function() {
-        $('#online_count').addClass('badge badge-important');
+        updateUserCount();
     }, 1);
 };
 
@@ -76,7 +95,7 @@ exports.userLeave = function(hook_name, args, cb) {
     // event is sent out before the count html is updated. We could use _.defer here but
     // to avoid importing another dependency setTimeout is used.
     setTimeout(function() {
-        $('#online_count').addClass('badge badge-important');
+        updateUserCount();
     }, 1);
 };
 
