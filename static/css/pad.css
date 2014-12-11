@@ -73,8 +73,13 @@ li[data-key=showusers] > a #online_count {
     opacity: 0;
 }
 
+.toolbar ul {
+    z-index: auto;
+}
+
 .toolbar ul.menu_left {
     margin-right: 50px;
+    right: auto;
 }
 
 .toolbar ul.menu_right {
@@ -83,7 +88,7 @@ li[data-key=showusers] > a #online_count {
 }
 
 .toolbar ul li {
-    height: 40px;
+    height: 42px;
 }
 
 .toolbar ul li.separator {
@@ -270,9 +275,13 @@ li[data-key=showusers] > a #online_count {
     width: 245px;
 }
 
+#editorcontainer {
+    top: 0 !important;
+}
+
 @media (max-width: 420px) {
-    .toolbar {
-        display: none;
+    div#editbar.toolbar.enabledtoolbar {
+        display: none !important;
     }
 
     #editorcontainerbox {

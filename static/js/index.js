@@ -30,9 +30,6 @@ exports.postAceInit = function (hook_name, args, cb) {
     $('#editorcontainerbox').animate({
         'top': '55px',
     }, 500);
-    $('#editorcontainer').animate({
-        'top': '0px',
-    }, 500);
 
     // Enable the spellchecker
     $('iframe[name="ace_outer"]').contents().find('iframe').contents().find('#innerdocbody').attr('spellcheck', 'true');
