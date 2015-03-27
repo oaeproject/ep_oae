@@ -182,7 +182,7 @@ li[data-key=showusers] > a #online_count {
 #editorcontainerbox #editorcontainer {
     overflow: auto;
     -webkit-overflow-scrolling: touch;
-    top: 0;
+    top: 0 !important;
 }
 
 #outerdocbody iframe {
