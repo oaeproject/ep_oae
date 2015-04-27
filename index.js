@@ -60,6 +60,11 @@ exports.expressCreateServer = function(hook, args, callback) {
             return;
         }
 
+        // Surprisingly, etherpad doesn't parse cookies automatically
+        if (!req.cookies) {
+            req.cookies = {};
+        }
+
         // Set the session cookie
         req.cookies.sessionID = req.query.sessionID;
         res.cookie('sessionID', req.query.sessionID);
