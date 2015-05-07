@@ -16,8 +16,8 @@ exports.postAceInit = function (hook_name, args, cb) {
     $('.buttonicon-showusers').removeClass('buttonicon-showusers').addClass('buttonicon-oae buttonicon-user');
 
     // Add extra buttons to the toolbar *after* the style select
-    $('ul.menu_left').append('<li data-type="button" data-key="colorcheck"><a class="grouped-left" data-l10n-id="pad.settings.colorcheck" title="Toggle authorship colors"><span class="buttonicon buttonicon-oae buttonicon-clearauthorship"></span></a></li>');
-    $('ul.menu_left').append('<li data-type="button" data-key="download"><a target="_blank" href="' + window.location.pathname + '/export/pdf" class="grouped-right" data-l10n-id="pad.importExport.exportpdf" title="Download"><span class="buttonicon buttonicon-oae buttonicon-download"></span></a></li>');
+    $('ul.menu_left').append('<li data-type="button" data-key="colorcheck"><a class="grouped-left" data-l10n-id="pad.settings.colorcheck" title="Toggle authorship colors"><button class="buttonicon buttonicon-oae buttonicon-clearauthorship"></button></a></li>');
+    $('ul.menu_left').append('<li data-type="button" data-key="download"><a target="_blank" href="' + window.location.pathname + '/export/pdf" class="grouped-right" data-l10n-id="pad.importExport.exportpdf" title="Download"><button class="buttonicon buttonicon-oae buttonicon-download"></button></a></li>');
 
     // Show the toolbar
     $('.toolbar').animate({
@@ -36,7 +36,7 @@ exports.postAceInit = function (hook_name, args, cb) {
 
     // Set default authorship colors
     pad.changeViewOption('showAuthorColors', authorColors);
-    
+
     // And toggle when button is clicked
     $('a[data-l10n-id="pad.settings.colorcheck"]').on('click', function() {
         authorColors = !authorColors;

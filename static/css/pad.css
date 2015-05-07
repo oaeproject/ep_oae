@@ -126,27 +126,23 @@ li[data-key=showusers] > a #online_count {
     background: transparent;
 }
 
-.toolbar ul li a:active {
-    background: none;
-    -webkit-box-shadow: none;
-       -moz-box-shadow: none;
-            box-shadow: none;
-}
-
-.toolbar ul li a span.buttonicon {
-    color: #333;
+.toolbar ul li a .buttonicon {
+    background-image: none;
+    color: #000;
+    display: block;
     font-size: 22px;
+    height: 27px;
     line-height: 22px;
+    width: 25px;
 }
 
-.toolbar ul li a:hover span.buttonicon {
+.toolbar ul li a:hover .buttonicon {
     color: #999;
 }
 
-.buttonicon {
-    background-image: none;
-    display: block;
-    height: 22px;
+.toolbar ul li a .buttonicon:focus {
+    border: 0;
+    outline: none;
 }
 
 /* Additional icons added by OAE */
