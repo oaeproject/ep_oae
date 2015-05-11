@@ -259,7 +259,7 @@ li[data-key=showusers] > a #online_count {
 /* Override the ep_headings style */
 #headings #heading-selection {
     height: 25px;
-    margin-top: 9px;
+    margin-top: 12px;
     padding: 0 4px;
 }
 
