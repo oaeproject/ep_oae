@@ -39,6 +39,11 @@ textarea {
     margin-top: 0 !important;
 }
 
+#innerdocbody h1 span, #innerdocbody h2 span, #innerdocbody h3 span,
+#innerdocbody h5 span, #innerdocbody h4 span, #innerdocbody h6 span {
+    line-height: 1.5em;
+}
+
 /* Clean up the users window */
 #users {
     min-width: 250px;
@@ -104,7 +109,7 @@ li[data-key=showusers] > a #online_count {
 .toolbar ul li > a,
 .toolbar ul li > label a {
     height: inherit;
-    padding: 10px 14px !important;
+    padding: 10px 10px !important;
 }
 
 .toolbar ul li > select {
