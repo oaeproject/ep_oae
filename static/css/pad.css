@@ -1,9 +1,6 @@
 /* Import the Open Sans font */
 @import url('//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700&subset=latin,cyrillic-ext,latin-ext,greek-ext');
 
-/* Import Bootstrap 3.2.0 */
-@import url('//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css');
-
 /* Override global values */
 body,
 textarea {
