@@ -36,9 +36,18 @@ textarea {
     margin-top: 0 !important;
 }
 
+#innerdocbody h1, #innerdocbody h2, #innerdocbody h3,
+#innerdocbody h4, #innerdocbody h5, #innerdocbody h6 {
+    line-height: 20px !important;
+}
+
 #innerdocbody h1 span, #innerdocbody h2 span, #innerdocbody h3 span,
-#innerdocbody h5 span, #innerdocbody h4 span, #innerdocbody h6 span {
+#innerdocbody h4 span, #innerdocbody h5 span, #innerdocbody h6 span {
     line-height: 1.5em;
+}
+#innerdocbody span {
+    padding-top: 1px;
+    padding-bottom: 1px;
 }
 
 /* Clean up the users window */
@@ -260,6 +269,7 @@ li[data-key=showusers] > a #online_count {
 
 /* Override the ep_headings style */
 #headings #heading-selection {
+    font-size: 14px;
     height: 25px;
     margin-top: 12px;
     padding: 0 4px;
@@ -277,7 +287,7 @@ li[data-key=showusers] > a #online_count {
     top: 0 !important;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 430px) {
     div#editbar.toolbar.enabledtoolbar {
         display: none !important;
     }
