@@ -54,9 +54,6 @@ textarea {
 #users {
     min-width: 250px;
 }
-#users #myusernameedit {
-    width: 90%;
-}
 
 /* Position the online count button a bit better */
 li[data-key=showusers] > a #online_count {
@@ -221,10 +218,11 @@ li[data-key=showusers] > a #online_count {
 
 #users #myusernameedit {
     border: none !important;
+    font-family: 'Open Sans', arial, helvetica, sans-serif;
     font-size: 18px;
-    height: 31px;
-    margin-left: 2px;
-    width: 95%;
+    height: 26px;
+    margin-left: 8px;
+    width: 90%;
 }
 
 #users #myuser {
@@ -269,6 +267,7 @@ li[data-key=showusers] > a #online_count {
 
 /* Override the ep_headings style */
 #headings #heading-selection {
+    font-family: 'Open Sans', arial, helvetica, sans-serif;
     font-size: 14px;
     height: 25px;
     margin-top: 12px;
