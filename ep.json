@@ -9,10 +9,10 @@
                 "userLeave": "ep_oae/index.js:userLeave"
             },
             "client_hooks": {
-                "aceEditorCSS": "ep_oae/static/js/index.js:aceEditorCSS",
-                "postAceInit": "ep_oae/static/js/index.js:postAceInit",
-                "userJoinOrUpdate": "ep_oae/static/js/index.js:userJoinOrUpdate",
-                "userLeave": "ep_oae/static/js/index.js:userLeave"
+                "aceEditorCSS": "ep_oae/static/js/index",
+                "postAceInit": "ep_oae/static/js/index",
+                "userJoinOrUpdate": "ep_oae/static/js/index",
+                "userLeave": "ep_oae/static/js/index"
             }
         }
     ]
