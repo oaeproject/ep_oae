@@ -9,20 +9,22 @@ It provides a way to do:
 
 You will need to set the `requireSession` and `editOnly` values to `true` in etherpad's `settings.json` file.
 
-It's recommended to also add in a `sessionKey`. This can be any random value, but should be the same across the cluster.
-
 To get it working, change the `dbType` to `cassandra` and enter the following `dbSettings`:
 
 ```javascript
 "dbSettings" : {
     "hosts": ["127.0.0.1:9160"],
     "keyspace": "oae",
-    "cfName": "Etherpad",
+    "columnFamily": "Etherpad",
     "user": "",
     "pass": "",
     "timeout": 3000,
     "replication": 1,
-    "strategyClass": "SimpleStrategy"
+    "strategyClass": "SimpleStrategy",
+    "clientOptions": {
+        "keyspace": "oae",
+        "contactPoints": ["127.0.0.1"]
+    }
 }
 ```
 
