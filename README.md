@@ -48,7 +48,7 @@ You should have the following structure (assuming you have etherpad at `/opt/eth
               * index.json
               * ep.json
 
-Copy or symlink the `static/css/padd.css` file in this plugin to `your-etherpad-directory/src/static/custom/pad.css`. This file will skin the etherpad chrome. In order to have custom titles for headers, copy or symlink the `static/templates/editbarButtons.ejs` file in this plugin to `your-etherpad-directory/node_modules/ep_headings/templates/editbarButtons.ejs`.
+Copy or symlink the `static/css/padd.css` file in this plugin to `your-etherpad-directory/src/static/custom/pad.css`. This file will skin the etherpad chrome.
 
 In order to use the OAE toolbar, the etherpad `settings.json` file needs to be updated to reflect the following changes:
 

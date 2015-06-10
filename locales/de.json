@@ -1,0 +1,13 @@
+{
+  "ep_headings.code" : "Code",
+  "ep_headings.h1" : "Titel 1",
+  "ep_headings.h2" : "Titel 2",
+  "ep_headings.h3" : "Titel 3",
+  "ep_headings.h4" : "Titel 4",
+  "ep_headings.h5" : "Titel 5",
+  "ep_headings.h6" : "Titel 6",
+  "ep_headings.normal" : "Normal",
+  "ep_headings.style" : "Stil",
+  "ep_oae.download": "Download",
+  "ep_oae.togglecolors": "Schaltet die Urheber Farben"
+}
