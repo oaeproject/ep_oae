@@ -27,6 +27,9 @@ exports.postAceInit = function (hook_name, args, cb) {
     $('#editorcontainerbox').animate({
         'top': '55px',
     }, 500);
+    
+    // Disable tabbing to download link since there's a button within it
+    $('.toolbar [data-key="download"] a').attr('tabindex','-1');
 
     // Enable the spellchecker
     $('iframe[name="ace_outer"]').contents().find('iframe').contents().find('#innerdocbody').attr('spellcheck', 'true');
