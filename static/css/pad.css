@@ -150,7 +150,12 @@ li[data-key=showusers] > a #online_count {
 
 .toolbar ul li a .buttonicon:focus {
     border: 0;
-    outline: none;
+}
+
+.toolbar ul li select:focus {
+    outline-color: initial;
+    outline-style: auto;
+    outline-width: initial;
 }
 
 /* Additional icons added by OAE */
