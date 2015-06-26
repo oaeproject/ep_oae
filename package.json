@@ -26,6 +26,7 @@
   "devDependencies": {
     "crowdin": "latest",
     "mv": "latest",
+    "optimist": "latest",
     "temp": "latest",
     "underscore": "latest"
   },

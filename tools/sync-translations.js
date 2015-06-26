@@ -13,8 +13,15 @@
  * permissions and limitations under the License.
  */
 
+var argv = require('optimist')
+    .usage('Usage: $0 -a <crowdin API key>')
+
+    .demand('a')
+    .alias('a', 'apiKey')
+    .describe('a', 'Crowdin API key')
+    .argv;
+
 var _ = require('underscore');
-var config = require(__dirname + '/../config');
 var Crowdin = require('crowdin');
 var fs = require('fs');
 var temp = require('temp');
@@ -22,7 +29,13 @@ var temp = require('temp');
 // Automatically track and cleanup files at exit
 temp.track();
 
-var crowdin = new Crowdin(config.crowdin);
+var config = {
+  endpointUrl: 'https://crowdin.com/api/project/apereo-oae'
+};
+
+config.apiKey = argv.apiKey;
+
+var crowdin = new Crowdin(config);
 
 /**
  * Make a POST request to crowdin
@@ -32,9 +45,9 @@ var crowdin = new Crowdin(config.crowdin);
  * @param  {Function}   callback    A function to call on completion    
  */
 var crowdinPost = function(path, data, callback) {
-    data.key = config.crowdin.apiKey;
+    data.key = config.apiKey;
     crowdin.requestData({
-        uri: config.crowdin.endpointUrl + path,
+        uri: config.endpointUrl + path,
         method: 'POST',
         formData: data,
         qs: {
@@ -71,7 +84,7 @@ var downloadCrowdinTranslations = function() {
 
 // Upload keys
 var keysPostData = {
-    "files[/ep_oae/locales/en.json]": fs.createReadStream(__dirname + '/../locales/en.json')
+    'files[/ep_oae/locales/en.json]': fs.createReadStream(__dirname + '/../locales/en.json')
 };
 console.log('Uploading keys');
 crowdinPost('/update-file', keysPostData, function() {
@@ -85,8 +98,8 @@ crowdinPost('/update-file', keysPostData, function() {
             // We don't upload translations for the source language, that's covered by the key upload
             if (file !== 'en.json') {
                 var translationPostData = {
-                    key: config.crowdin.apiKey,
-                    "files[/ep_oae/locales/en.json]": fs.createReadStream(__dirname + '/../locales/' + file),
+                    key: config.apiKey,
+                    'files[/ep_oae/locales/en.json]': fs.createReadStream(__dirname + '/../locales/' + file),
                     language: file.substring(0, 2)
                 };
                 crowdinPost('/upload-translation', translationPostData, done);
