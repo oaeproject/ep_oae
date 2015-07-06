@@ -57,6 +57,7 @@ textarea {
 
 /* Position the online count button a bit better */
 li[data-key=showusers] > a #online_count {
+    background-color: #000;
     -webkit-border-radius: 4px !important;
        -moz-border-radius: 4px !important;
             border-radius: 4px !important;
@@ -66,6 +67,11 @@ li[data-key=showusers] > a #online_count {
     padding: 3px 4px;
     right: 1px;
     top: 5px;
+}
+
+li[data-key=showusers] > a:focus #online_count,
+li[data-key=showusers] > a:hover #online_count {
+    background-color: #999;
 }
 
 /* Hide chat */
