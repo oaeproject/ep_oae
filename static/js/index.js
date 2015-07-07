@@ -57,8 +57,6 @@ exports.postAceInit = function (hook_name, args, cb) {
  */
 
 updateUserCount = function() {
-    // Restore classes that etherpad may remove
-    $('#online_count').addClass('badge badge-important');
     // No need to show a badge if only one user is accessing the document
     if ($('#online_count').text() === "1") {
         $('#online_count').hide();
