@@ -58,21 +58,17 @@ textarea {
 /* Position the users button and online count a bit better */
 .toolbar ul li a .buttonicon {
     display: inline-block !important;
-    left: 3px;
-    position: relative;
 }
 
 li[data-key=showusers] > a #online_count {
     background-color: #000;
-    -webkit-border-radius: 4px;
-       -moz-border-radius: 4px;
-            border-radius: 4px;
+    border-radius: 4px;
     color: #FFF;
     display: inline-block;
     font-weight: 700;
-    padding: 3px 4px;
+    padding: 1px 5px;
     position: relative;
-    top: -6px;
+    top: -4px;
 }
 
 li[data-key=showusers] > a:focus #online_count,
