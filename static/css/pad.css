@@ -81,6 +81,10 @@ li[data-key=showusers] > a:hover #online_count {
     display: none;
 }
 
+.buttonicon:focus {
+    border: none !important;
+}
+
 /* Restyle the toolbar */
 .toolbar {
     background: transparent;
@@ -152,13 +156,16 @@ li[data-key=showusers] > a:hover #online_count {
     width: 25px;
 }
 
-.toolbar ul li a:hover .buttonicon {
+.toolbar ul li a:hover .buttonicon,
+.toolbar ul li a .buttonicon:focus {
     color: #999;
 }
 
-.toolbar ul li a .buttonicon:focus {
-    border: 0;
-    outline: none;
+.toolbar ul li a .buttonicon:focus,
+.toolbar ul li select:focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
 }
 
 /* Additional icons added by OAE */

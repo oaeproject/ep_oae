@@ -16,8 +16,8 @@ exports.postAceInit = function (hook_name, args, cb) {
     $('.buttonicon-showusers').removeClass('buttonicon-showusers').addClass('buttonicon-oae buttonicon-user');
 
     // Add extra buttons to the toolbar *after* the style select
-    $('ul.menu_left').append('<li data-type="button" data-key="colorcheck"><a class="grouped-left" data-l10n-id="pad.settings.colorcheck" title="Toggle authorship colors"><button class="buttonicon buttonicon-oae buttonicon-clearauthorship"></button></a></li>');
-    $('ul.menu_left').append('<li data-type="button" data-key="download"><a target="_blank" href="' + window.location.pathname + '/export/pdf" class="grouped-right" data-l10n-id="pad.importExport.exportpdf" title="Download"><button class="buttonicon buttonicon-oae buttonicon-download"></button></a></li>');
+    $('ul.menu_left').append('<li data-type="button" data-key="colorcheck"><a class="grouped-left" data-l10n-id="pad.settings.colorcheck" title="Toggle authorship colors"><button class="buttonicon buttonicon-oae buttonicon-clearauthorship" title="Toggle authorship colors"></button></a></li>');
+    $('ul.menu_left').append('<li data-type="button" data-key="download"><a target="_blank" href="' + window.location.pathname + '/export/pdf" class="grouped-right" data-l10n-id="pad.importExport.exportpdf" title="Download"><button class="buttonicon buttonicon-oae buttonicon-download" title="Download"></button></a></li>');
 
     // Show the toolbar
     $('.toolbar').animate({
@@ -27,6 +27,9 @@ exports.postAceInit = function (hook_name, args, cb) {
     $('#editorcontainerbox').animate({
         'top': '55px',
     }, 500);
+    
+    // Disable tabbing to download link since there's a button within it
+    $('.toolbar [data-key="download"] a').attr('tabindex','-1');
 
     // Enable the spellchecker
     $('iframe[name="ace_outer"]').contents().find('iframe').contents().find('#innerdocbody').attr('spellcheck', 'true');
