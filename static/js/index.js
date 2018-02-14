@@ -15,6 +15,9 @@ exports.postAceInit = function (hook_name, args, cb) {
     // Replace the icon in the show users button
     $('.buttonicon-showusers').removeClass('buttonicon-showusers').addClass('buttonicon-oae buttonicon-user');
 
+    // Add OAE class to comment icon
+    $('.commenticon').addClass('buttonicon-oae buttonicon-comment');
+
     // Add extra buttons to the toolbar *after* the style select
     $('ul.menu_left').append('<li data-type="button" data-key="colorcheck"><a class="grouped-left" data-l10n-id="pad.settings.colorcheck" title="Toggle authorship colors"><button class="buttonicon buttonicon-oae buttonicon-clearauthorship"></button></a></li>');
     $('ul.menu_left').append('<li data-type="button" data-key="download"><a target="_blank" href="' + window.location.pathname + '/export/pdf" class="grouped-right" data-l10n-id="pad.importExport.exportpdf" title="Download"><button class="buttonicon buttonicon-oae buttonicon-download"></button></a></li>');
