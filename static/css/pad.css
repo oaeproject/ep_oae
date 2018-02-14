@@ -232,9 +232,9 @@ li[data-key=showusers] > a:hover #online_count {
     -webkit-border-radius: 5px !important;
     -moz-border-radius: 5px !important;
     border-radius: 5px !important;
- -webkit-box-shadow: 0px 0px 10px #999;
+    -webkit-box-shadow: 0px 0px 10px #999;
     -moz-box-shadow: 0px 0px 10px #999;
-         box-shadow: 0px 0px 10px #999;
+    box-shadow: 0px 0px 10px #999;
 }
 
 .comment-buttons input {
