@@ -5,7 +5,7 @@ It provides a way to do:
  * simple authentication by passing in the sessionID (that was created in Hilary) in the querystring.
  * skinning of the editor interface.
 
-## Configuration
+## Configuration
 
 You will need to set the `requireSession` and `editOnly` values to `true` in etherpad's `settings.json` file.
 
