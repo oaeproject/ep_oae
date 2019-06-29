@@ -19,8 +19,8 @@ exports.postAceInit = function (hook_name, args, cb) {
     $('.commenticon').addClass('buttonicon-oae buttonicon-comment');
 
     // Add extra buttons to the toolbar *after* the style select
-    $('ul.menu_left').append('<li data-type="button" data-key="colorcheck"><a class="grouped-left" data-l10n-id="pad.settings.colorcheck" title="Toggle authorship colors"><button class="buttonicon buttonicon-oae buttonicon-clearauthorship"></button></a></li>');
-    $('ul.menu_left').append('<li data-type="button" data-key="download"><a target="_blank" href="' + window.location.pathname + '/export/pdf" class="grouped-right" data-l10n-id="pad.importExport.exportpdf" title="Download"><button class="buttonicon buttonicon-oae buttonicon-download"></button></a></li>');
+    $('ul.menu_left').append('<li data-type="button" data-key="colorcheck"><a class="grouped-left" data-l10n-id="pad.settings.colorcheck" title="' + window._('ep_oae.togglecolors') + '"><button class="buttonicon buttonicon-oae buttonicon-clearauthorship"></button></a></li>');
+    $('ul.menu_left').append('<li data-type="button" data-key="download"><a target="_blank" href="' + window.location.pathname + '/export/pdf" class="grouped-right" data-l10n-id="pad.importExport.exportpdf" title="' + window._('ep_oae.download') + '"><button class="buttonicon buttonicon-oae buttonicon-download"></button></a></li>');
 
     // Show the toolbar
     $('.toolbar').animate({

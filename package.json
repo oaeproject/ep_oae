@@ -23,6 +23,13 @@
   "dependencies": {
     "amqp": "git://github.com/oaeproject/node-amqp#0.1.8.x"
   },
+  "devDependencies": {
+    "crowdin": "latest",
+    "mv": "latest",
+    "optimist": "latest",
+    "temp": "latest",
+    "underscore": "latest"
+  },
   "engines": {
     "node": ">= 0.8.0"
   }
