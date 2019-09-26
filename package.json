@@ -1,11 +1,11 @@
 {
   "name": "ep_oae",
   "description": "Open Academic Environment (OAE) Etherpad Plugin",
-  "version": "8.0.0",
+  "version": "9.0.0",
   "homepage": "http://www.oaeproject.org",
   "author": {
     "name": "The Apereo Foundation",
-    "email": "oae-dev@collab.sakaiproject.org"
+    "email": "oae@apereo.org"
   },
   "repository": {
     "type": "git",
@@ -21,9 +21,47 @@
     }
   ],
   "dependencies": {
-    "amqp": "git://github.com/oaeproject/node-amqp#0.1.8.x"
+    "ioredis": "^4.14.0"
+  },
+  "devDependencies": {
+    "xo": "^0.24.0",
+    "eslint-config-prettier": "6.0.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "prettier": "^1.18.2"
   },
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">=10.13.0"
+  },
+  "scripts": {
+    "lint": "xo --prettier --quiet '**/*.js'"
+  },
+  "xo": {
+    "prettier": true,
+    "extends": [
+      "prettier"
+    ],
+    "plugins": [
+      "prettier"
+    ],
+    "ignores": [
+      "static/**"
+    ],
+    "rules": {
+      "import/no-extraneous-dependencies": "off",
+      "import/no-unresolved": "off",
+      "promise/prefer-await-to-then": "off",
+      "capitalized-comments": "off",
+      "max-params": "off",
+      "max-nested-callbacks": "off",
+      "prettier/prettier": "error",
+      "no-use-before-define": "off",
+      "import/no-unresolved": [
+        2,
+        {
+          "commonjs": true,
+          "amd": true
+        }
+      ]
+    }
   }
 }
